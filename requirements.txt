@@ -1,0 +1,14 @@
+python-dotenv==1.0.1
+streamlit==1.37.0
+langchain-community==0.2.10
+langchain-text-splitters==0.2.2
+langchain-groq==0.1.9
+unstructured
+unstructured[pdf]
+faiss-cpu
+transformers==4.43.3
+sentence-transformers==3.0.1
+nltk==3.9.1
+pi_heif
+opencv-python
+
