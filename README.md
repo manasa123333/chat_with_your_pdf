@@ -34,10 +34,6 @@ To set up the project, follow these steps:
    pip install -r requirements.txt
    ```
 
-4. **Install Additional Dependencies** (if necessary):
-
-   Ensure all system dependencies are installed (e.g., `libGL` if needed).
-
 ## Usage
 
 To run the application, use the following command:
@@ -57,32 +53,8 @@ python app.py
 2. **Interact with the Application**:
 
    Open the interface provided and start chatting with your PDF.
+   [Here is the interface](https://huggingface.co/spaces/Manasa1/Chat_With_your_docs)
 
-## Contributing
-
-Contributions are welcome! If you’d like to contribute to this project, please follow these guidelines:
-
-1. **Fork the Repository**.
-2. **Create a New Branch**:
-   
-   ```bash
-   git checkout -b feature/your-feature
-   ```
-
-3. **Make Your Changes**.
-4. **Commit Your Changes**:
-   
-   ```bash
-   git commit -am 'Add some feature'
-   ```
-
-5. **Push to the Branch**:
-   
-   ```bash
-   git push origin feature/your-feature
-   ```
-
-6. **Create a New Pull Request**.
 
 ## License
 
@@ -90,7 +62,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or feedback, please contact [Your Name] at [Your Email].
+For any questions or feedback, please contact [Manasa B Rao] at [manasabrao2020@gmail.com].
 
 ---
 
