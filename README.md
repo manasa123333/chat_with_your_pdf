@@ -2,7 +2,10 @@
 
 ## Overview
 
-**Chat with Your PDF** is a Python application that allows users to interact with PDF documents using natural language. The application extracts text from PDFs and enables users to ask questions or engage in conversations about the content of the document.
+**Chat with Your PDF** is a Python application that allows users to interact with PDF documents using natural language. The application extracts text from PDFs and lets users ask questions or converse about the document's content.
+
+## Demo
+[chat_with_your_pdf](https://huggingface.co/spaces/Manasa1/Chat_With_your_docs)
 
 ## Features
 
