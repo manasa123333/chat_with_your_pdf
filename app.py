@@ -9,18 +9,22 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 import os
 import nltk
-
-# Load environment variables
-load_dotenv()
-
-import nltk
 nltk.download('punkt_tab')
+nltk.download('averaged_perceptron_tagger_eng')
+# Install Poppler and Tesseract in the runtime environment
+os.system("apt-get update && apt-get install -y poppler-utils tesseract-ocr")
 
+secret = os.getenv('Groq_api')
 
-working_dir = os.getcwd()
+working_dir = os.path.dirname(os.path.abspath(__file__))
 
 def load_documents(file_path):
-    loader = UnstructuredPDFLoader(file_path)
+    # Specify poppler_path and tesseract_path to ensure compatibility
+    loader = UnstructuredPDFLoader(
+        file_path, 
+        poppler_path="/usr/bin", 
+        tesseract_path="/usr/bin/tesseract"
+    )
     documents = loader.load()
     return documents
 
@@ -37,7 +41,8 @@ def setup_vectorstore(documents):
 
 def create_chain(vectorstores):
     llm = ChatGroq(
-        model="llama-3.1-70b-versatile",
+        api_key=secret,
+        model="llama-3.1-8b-instant",
         temperature=0
     )
     retriever = vectorstores.as_retriever()
@@ -55,6 +60,7 @@ def create_chain(vectorstores):
     )
     return chain
 
+# Streamlit page configuration
 st.set_page_config(
     page_title="Chat with your documents",
     page_icon="📑",
@@ -63,13 +69,14 @@ st.set_page_config(
 
 st.title("📝Chat With your docs 😎")
 
+# Initialize session states
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 uploaded_file = st.file_uploader(label="Upload your PDF")
 
 if uploaded_file:
-    file_path = f"{working_dir}{uploaded_file.name}"
+    file_path = f"{working_dir}/{uploaded_file.name}"
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
 
@@ -79,10 +86,12 @@ if uploaded_file:
     if "conversation_chain" not in st.session_state:
         st.session_state.conversation_chain = create_chain(st.session_state.vectorstores)
 
+# Display chat history
 for message in st.session_state.chat_history:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+# User input handling
 user_input = st.chat_input("Ask any questions relevant to uploaded pdf")
 
 if user_input:
@@ -95,5 +104,3 @@ if user_input:
         assistant_response = response["answer"]
         st.markdown(assistant_response)
         st.session_state.chat_history.append({"role": "assistant", "content": assistant_response})
-
-
